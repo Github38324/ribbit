@@ -2,6 +2,7 @@
   <nav class="app-topnav">
     <div class="container">
       <ul>
+        <!-- 对是否登录过进行判断 来进行隐藏和显示 -->
                <template v-if="profile.token">
           <li><a href="javascript:;"><i class="iconfont icon-user"></i>{{profile.account}}</a></li>
           <li><a href="javascript:;">退出登录</a></li>
@@ -28,6 +29,7 @@ export default {
   name: 'AppTopNavbar',
   setup () {
     const store = useStore()
+    // 拿到user下的profile
     const profile = computed(() => {
       return store.state.user.profile
     })

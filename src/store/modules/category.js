@@ -17,6 +17,7 @@ export default {
       state.list = headCategory
     },
     // 一级类目下的open改为true
+    // 此处的id是当前鼠标经过的一级目录的id 由点击或经过事件传进来
     show (state, id) {
       const category = state.list.find(item => item.id === id)
       category.open = true
