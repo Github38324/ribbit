@@ -157,7 +157,7 @@ export default {
       opacity: 0;
       transition: all 0.5s;
       &.prev{
-        left: 270px;
+        left: 20px;
       }
       &.next{
         right: 20px;
