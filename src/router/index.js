@@ -1,5 +1,5 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import Layout from '@/views/Layout'
+import Layout from '@/views/Layout.vue'
 import Home from '@/views/home'
 import SubCategory from '@/views/category/sub'
 import TopCategory from '@/views/category/index'

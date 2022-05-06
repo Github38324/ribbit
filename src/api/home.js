@@ -1,4 +1,4 @@
-// 首页需要的api
+/* eslint-disable import/no-duplicates */
 import request from '@/utils/request'
 
 // 获取品牌的api 参数表示品牌的数量
