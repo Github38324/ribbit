@@ -3,7 +3,9 @@ import Layout from '@/views/Layout.vue'
 import Home from '@/views/home'
 import SubCategory from '@/views/category/sub'
 import TopCategory from '@/views/category/index'
+import PageLogin from '@/views/login/index'
 const Goods = () => import('@/views/goods/index')
+const LoginCallback = () => import('@/views/login/callback')
 // 路由规则
 const routes = [
   {
@@ -16,7 +18,9 @@ const routes = [
       { path: '/product/:id', component: Goods }
 
     ]
-  }
+  },
+  { path: '/login', component: PageLogin },
+  { path: '/login/callback', component: LoginCallback }
 ]
 
 const router = createRouter({
