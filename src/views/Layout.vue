@@ -7,7 +7,7 @@
     <AppHeaderSticky></AppHeaderSticky>
   <!-- n内容 -->
   <div class="appp">
-<router-view></router-view>
+   <Router-view></Router-view>
   </div>
   <AppFooter></AppFooter>
 

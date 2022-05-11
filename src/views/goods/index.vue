@@ -18,9 +18,9 @@
           <!-- sku组件 skuId="1369155865461919746" 测试选中 -->
           <GoodsSku :goods="goods" @change="changeSku" />
           <!-- 数量选择组件 -->
-          <XtxNumbox v-model="count" laber='数量' :max=10></XtxNumbox>
+          <XtxNumbox v-model="num" laber='数量' :max="goods.inventory"></XtxNumbox>
           <!-- 按钮组件 -->
-          <XtxButton type="primary" size="large" style="margin-top:10px">加入购物车</XtxButton>
+          <XtxButton @click="insertCart" type="primary" size="large" style="margin-top:10px">加入购物车</XtxButton>
         </div>
       </div>
       <!-- 商品推荐 -->
@@ -58,6 +58,8 @@ import GoodsWarn from './components/goods-warn.vue'
 import { nextTick, provide, ref, watch } from 'vue'
 import { findGoods } from '@/api/product'
 import { useRoute } from 'vue-router'
+import { useStore } from 'vuex'
+import Message from '@/components/library/Message'
 export default {
   name: 'XtxGoodsPage',
   components: { GoodsImage, GoodsName, GoodsSku, GoodsRelevant, GoodsTabs, GoodsHot, GoodsWarn },
@@ -69,10 +71,44 @@ export default {
         goods.value.price = sku.price
         goods.value.oldPrice = sku.oldPrice
         goods.value.inventory = sku.inventory
+        currSku.value = sku
+      } else {
+        currSku.value = null
       }
     }
     provide('goods', goods)
-    return { goods, changeSku }
+    const num = ref(1)
+
+    // 加入购物车逻辑
+    // 加入购物车
+    const store = useStore()
+    const currSku = ref(null)
+    const insertCart = () => {
+      if (currSku.value && currSku.value.skuId) {
+        // id skuId name attrsText picture price nowPrice selected stock count isEffective
+        const { skuId, specsText: attrsText, inventory: stock } = currSku.value
+        const { id, name, price, mainPictures } = goods.value
+        store.dispatch('cart/insertCart', {
+          skuId,
+          attrsText,
+          stock,
+          id,
+          name,
+          price,
+          nowPrice: price,
+          picture: mainPictures[0],
+          selected: true,
+          isEffective: true,
+          count: num.value
+        }).then(() => {
+          Message({ type: 'success', text: '加入购物车成功' })
+        })
+      } else {
+        Message({ text: '请选择完整规格' })
+      }
+    }
+
+    return { goods, changeSku, num, insertCart }
   }
 }
 
@@ -94,6 +130,7 @@ const useGoods = () => {
   }, { immediate: true })
   return goods
 }
+
 </script>
 
 <style scoped lang='less'>

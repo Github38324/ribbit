@@ -4,6 +4,7 @@ import Home from '@/views/home'
 import SubCategory from '@/views/category/sub'
 import TopCategory from '@/views/category/index'
 import PageLogin from '@/views/login/index'
+import XtxCartPage from '@/views/cart/index'
 const Goods = () => import('@/views/goods/index')
 const LoginCallback = () => import('@/views/login/callback')
 // 路由规则
@@ -15,7 +16,8 @@ const routes = [
       { path: '/', component: Home },
       { path: '/category/:id', component: TopCategory },
       { path: '/category/sub/:id', component: SubCategory },
-      { path: '/product/:id', component: Goods }
+      { path: '/product/:id', component: Goods },
+      { path: '/cart', component: XtxCartPage }
 
     ]
   },
