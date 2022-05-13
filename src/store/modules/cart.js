@@ -120,11 +120,11 @@ export default {
         }
       })
     },
-    // 获取购物车列表
+    // 获取商品列表
     findCartList (ctx) {
       return new Promise((resolve, reject) => {
         if (ctx.rootState.user.profile.token) {
-        // 登录 TODO
+          // 登录 TODO
           findCartList().then(data => {
             ctx.commit('setCartList', data.result)
             resolve()
